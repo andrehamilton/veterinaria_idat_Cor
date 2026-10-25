@@ -1,0 +1,97 @@
+<main class="form-page">
+  <a class="back" routerLink="/">← Volver al inicio</a>
+
+  <section class="form-card">
+    <div class="eyebrow">RESERVA UN ESPACIO</div>
+    <h1>Registro de citas</h1>
+    <p class="intro">Agenda una visita para que podamos atender a tu mascota.</p>
+
+    @if (enviado) {
+      <div class="panel-exito">
+        <div class="icono-check">✓</div>
+        <h2>¡Cita registrada correctamente!</h2>
+        <p>La cita de <strong>{{ datosCita.mascota }}</strong> quedó solicitada.</p>
+        <div class="constancia">
+          <span>Código de cita</span>
+          <strong>{{ codigoRegistro }}</strong>
+        </div>
+        <p class="nota">
+          {{ datosCita.servicio }} · {{ datosCita.fecha }} a las {{ datosCita.hora }}
+        </p>
+        <a class="back" routerLink="/">Volver al inicio →</a>
+      </div>
+    }
+
+    @if (!enviado) {
+      <form #formCita="ngForm" (ngSubmit)="guardar()">
+        <div class="seccion-form">
+          <h2>1. Datos del paciente</h2>
+          <div class="row">
+            <label>
+              Nombre del responsable
+              <input
+                name="responsable"
+                [(ngModel)]="datosCita.responsable"
+                required
+                placeholder="Nombre completo"
+              />
+            </label>
+            <label>
+              Nombre de la mascota
+              <input
+                name="mascota"
+                [(ngModel)]="datosCita.mascota"
+                required
+                placeholder="Ej. Luna"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div class="seccion-form">
+          <h2>2. Fecha y tipo de visita</h2>
+          <label>
+            Tipo de servicio
+            <select name="servicio" [(ngModel)]="datosCita.servicio" required>
+              <option>Consulta general</option>
+              <option>Control de rutina</option>
+              <option>Vacunación</option>
+              <option>Baño y peluquería</option>
+              <option>Odontología</option>
+            </select>
+          </label>
+
+          <div class="row">
+            <label>
+              Fecha
+              <input name="fecha" type="date" [(ngModel)]="datosCita.fecha" required />
+            </label>
+            <label>
+              Hora
+              <input name="hora" type="time" [(ngModel)]="datosCita.hora" required />
+            </label>
+          </div>
+
+          <label>
+            Motivo de la visita
+            <textarea
+              name="motivo"
+              rows="4"
+              [(ngModel)]="datosCita.motivo"
+              placeholder="Cuéntanos qué necesita tu mascota..."
+            ></textarea>
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="!formCita.valid"
+          [class.btn-activo]="formCita.valid"
+          [class.btn-bloqueado]="!formCita.valid"
+        >
+          Confirmar cita <span>→</span>
+        </button>
+      </form>
+    }
+  </section>
+</main>

@@ -1,0 +1,85 @@
+<main class="form-page">
+  <a class="back" routerLink="/">← Volver al inicio</a>
+
+  <section class="form-card">
+    <div class="eyebrow">LIBRO DE RECLAMACIONES</div>
+    <h1>Queremos escucharte</h1>
+    <p class="intro">Cuéntanos cómo podemos mejorar tu experiencia en Huellitas.</p>
+
+    @if (enviado) {
+      <div class="panel-exito">
+        <div class="icono-check">✓</div>
+        <h2>¡Reclamo recibido!</h2>
+        <p>Gracias, <strong>{{ datosReclamo.nombre }}</strong>. Revisaremos tu mensaje.</p>
+        <div class="constancia">
+          <span>Código de seguimiento</span>
+          <strong>{{ codigoRegistro }}</strong>
+        </div>
+        <p class="nota">Enviaremos novedades a {{ datosReclamo.correo }}.</p>
+        <a class="back" routerLink="/">Volver al inicio →</a>
+      </div>
+    }
+
+    @if (!enviado) {
+      <form #formReclamo="ngForm" (ngSubmit)="guardar()">
+        <div class="seccion-form">
+          <h2>1. Tus datos</h2>
+          <label>
+            Nombre completo
+            <input
+              name="nombre"
+              [(ngModel)]="datosReclamo.nombre"
+              required
+              placeholder="Tu nombre"
+            />
+          </label>
+          <label>
+            Correo electrónico
+            <input
+              name="correo"
+              type="email"
+              [(ngModel)]="datosReclamo.correo"
+              required
+              email
+              placeholder="hola@correo.com"
+            />
+          </label>
+        </div>
+
+        <div class="seccion-form">
+          <h2>2. Cuéntanos lo sucedido</h2>
+          <label>
+            Motivo
+            <select name="motivo" [(ngModel)]="datosReclamo.motivo" required>
+              <option value="">Selecciona un motivo</option>
+              <option>Atención recibida</option>
+              <option>Servicio brindado</option>
+              <option>Facturación</option>
+              <option>Otro</option>
+            </select>
+          </label>
+          <label>
+            Describe tu reclamo
+            <textarea
+              name="detalle"
+              rows="6"
+              [(ngModel)]="datosReclamo.detalle"
+              required
+              minlength="12"
+              placeholder="Escribe aquí los detalles de tu experiencia..."
+            ></textarea>
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="!formReclamo.valid"
+          [class.btn-activo]="formReclamo.valid"
+          [class.btn-bloqueado]="!formReclamo.valid"
+        >
+          Enviar reclamo <span>→</span>
+        </button>
+      </form>
+    }
+  </section>
+</main>

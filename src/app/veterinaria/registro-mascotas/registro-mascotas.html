@@ -1,0 +1,82 @@
+<main class="form-page">
+  <a class="back" routerLink="/">← Volver al inicio</a>
+
+  <section class="form-card">
+    <div class="eyebrow">NUEVO PACIENTE</div>
+    <h1>Registro de mascotas</h1>
+    <p class="intro">Completa la ficha para que podamos cuidar mejor de tu compañero.</p>
+
+    @if (enviado) {
+      <div class="panel-exito">
+        <div class="icono-check">✓</div>
+        <h2>¡Mascota registrada correctamente!</h2>
+        <p><strong>{{ datosMascota.nombre }}</strong> ya forma parte de nuestros pacientes.</p>
+        <div class="constancia">
+          <span>Código de paciente</span>
+          <strong>{{ codigoRegistro }}</strong>
+        </div>
+        <p class="nota">Responsable: {{ datosMascota.responsable }} · {{ datosMascota.especie }}</p>
+        <a class="back" routerLink="/registro-citas">Agendar una cita →</a>
+      </div>
+    }
+
+    @if (!enviado) {
+      <form #formMascota="ngForm" (ngSubmit)="guardar()">
+        <div class="seccion-form">
+          <h2>1. Datos de la mascota</h2>
+          <label>
+            Nombre de la mascota
+            <input name="nombre" [(ngModel)]="datosMascota.nombre" required placeholder="Ej. Luna" />
+          </label>
+          <div class="row">
+            <label>
+              Especie
+              <select name="especie" [(ngModel)]="datosMascota.especie" required>
+                <option>Perro</option>
+                <option>Gato</option>
+                <option>Ave</option>
+                <option>Otro</option>
+              </select>
+            </label>
+            <label>
+              Raza
+              <input name="raza" [(ngModel)]="datosMascota.raza" required placeholder="Ej. Mestizo" />
+            </label>
+          </div>
+          <label>
+            Edad
+            <input name="edad" [(ngModel)]="datosMascota.edad" required placeholder="Ej. 2 años" />
+          </label>
+        </div>
+
+        <div class="seccion-form">
+          <h2>2. Datos del responsable</h2>
+          <label>
+            Nombre completo
+            <input name="responsable" [(ngModel)]="datosMascota.responsable" required placeholder="Nombre del responsable" />
+          </label>
+          <label>
+            Teléfono de contacto
+            <input
+              name="telefono"
+              type="tel"
+              [(ngModel)]="datosMascota.telefono"
+              required
+              minlength="7"
+              placeholder="+51 987 654 321"
+            />
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="!formMascota.valid"
+          [class.btn-activo]="formMascota.valid"
+          [class.btn-bloqueado]="!formMascota.valid"
+        >
+          Registrar mascota <span>→</span>
+        </button>
+      </form>
+    }
+  </section>
+</main>

@@ -1,0 +1,88 @@
+<main class="form-page">
+  <a class="back" routerLink="/">← Volver al inicio</a>
+
+  <section class="form-card">
+    <div class="eyebrow">BIENVENIDO A HUELLITAS</div>
+    <h1>Crear cuenta</h1>
+    <p class="intro">Registra tus datos para organizar el cuidado de tu compañero.</p>
+
+    @if (enviado) {
+      <div class="panel-exito">
+        <div class="icono-check">✓</div>
+        <h2>¡Cuenta creada correctamente!</h2>
+        <p>El usuario <strong>{{ datosUsuario.nombre }}</strong> fue registrado.</p>
+        <div class="constancia">
+          <span>Código de usuario</span>
+          <strong>{{ codigoRegistro }}</strong>
+        </div>
+        <p class="nota">Ya puedes usar tu cuenta para registrar mascotas y solicitar citas.</p>
+        <a class="back" routerLink="/registro-mascotas">Registrar una mascota →</a>
+      </div>
+    }
+
+    @if (!enviado) {
+      <form #formUsuario="ngForm" (ngSubmit)="guardar()">
+        <div class="seccion-form">
+          <h2>1. Datos personales</h2>
+          <label>
+            Nombre completo
+            <input
+              name="nombre"
+              [(ngModel)]="datosUsuario.nombre"
+              required
+              minlength="3"
+              placeholder="Ej. Valentina Ríos"
+            />
+          </label>
+          <label>
+            Correo electrónico
+            <input
+              name="correo"
+              type="email"
+              [(ngModel)]="datosUsuario.correo"
+              required
+              email
+              placeholder="hola@correo.com"
+            />
+          </label>
+          <label>
+            Teléfono
+            <input
+              name="telefono"
+              type="tel"
+              [(ngModel)]="datosUsuario.telefono"
+              required
+              minlength="7"
+              placeholder="+51 987 654 321"
+            />
+          </label>
+        </div>
+
+        <div class="seccion-form">
+          <h2>2. Acceso a la cuenta</h2>
+          <label>
+            Contraseña
+            <input
+              name="password"
+              type="password"
+              [(ngModel)]="datosUsuario.password"
+              required
+              minlength="8"
+              placeholder="Mínimo 8 caracteres"
+            />
+          </label>
+          <p class="nota">Usa al menos 8 caracteres para proteger tu cuenta.</p>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="!formUsuario.valid"
+          [class.btn-activo]="formUsuario.valid"
+          [class.btn-bloqueado]="!formUsuario.valid"
+        >
+          Crear cuenta <span>→</span>
+        </button>
+      </form>
+    }
+  </section>
+</main>

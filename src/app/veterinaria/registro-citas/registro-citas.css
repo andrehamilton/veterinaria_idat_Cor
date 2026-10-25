@@ -1,0 +1,236 @@
+:host {
+  display: block;
+}
+
+.form-page {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 18px;
+}
+
+.back {
+  display: inline-block;
+  margin: 0 0 17px;
+  color: #638068;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.back:hover {
+  color: #365f3e;
+  text-decoration: underline;
+}
+
+.form-card {
+  max-width: 680px;
+  margin: auto;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid #e9eee7;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px #263a2c08;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  color: #8ca08e;
+}
+
+h1 {
+  margin: 10px 0 7px;
+  color: #354a39;
+  font: 500 32px Georgia, serif;
+}
+
+.intro {
+  margin: 0 0 25px;
+  color: #89958b;
+  font-size: 13px;
+}
+
+.form-card form {
+  display: grid;
+  gap: 20px;
+}
+
+.seccion-form {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  background: #fcfdfb;
+  border: 1px solid #edf1eb;
+  border-radius: 10px;
+}
+
+.seccion-form h2 {
+  margin: 0 0 2px;
+  color: #526b55;
+  font: 600 14px Georgia, serif;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  color: #56665a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  color: #405044;
+  background: #fff;
+  border: 1px solid #e3eae2;
+  border-radius: 8px;
+  outline: none;
+  font: 13px inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input,
+select {
+  height: 42px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #81a883;
+  box-shadow: 0 0 0 3px #81a88320;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: #d58979;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.nota {
+  margin: 0;
+  color: #89958b;
+  font-size: 11px;
+}
+
+/* Botón dinámico: activo cuando el formulario es válido. */
+.form-card button {
+  width: 100%;
+  padding: 14px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.btn-activo {
+  background: #527e59;
+  color: #fff;
+}
+
+.btn-activo:hover {
+  background: #365f3e;
+  transform: translateY(-1px);
+}
+
+.btn-bloqueado,
+.form-card button:disabled {
+  background: #e2e9e0;
+  color: #94a194;
+  cursor: not-allowed;
+}
+
+.form-card button span {
+  margin-left: 8px;
+}
+
+/* Panel que aparece después de registrar los datos. */
+.panel-exito {
+  padding: 30px;
+  text-align: center;
+  background: #f4faf3;
+  border: 2px solid #d8e9d7;
+  border-radius: 12px;
+}
+
+.icono-check {
+  margin-bottom: 10px;
+  color: #638e67;
+  font-size: 44px;
+}
+
+.panel-exito h2 {
+  margin: 0 0 10px;
+  color: #405f45;
+  font: 500 23px Georgia, serif;
+}
+
+.panel-exito p {
+  color: #738174;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.constancia {
+  display: grid;
+  gap: 6px;
+  width: max-content;
+  max-width: 100%;
+  margin: 20px auto;
+  padding: 15px 24px;
+  background: #eaf4e8;
+  border-radius: 8px;
+}
+
+.constancia span {
+  color: #788d78;
+  font-size: 10px;
+}
+
+.constancia strong {
+  color: #466b4b;
+  font-size: 19px;
+  letter-spacing: 1px;
+}
+
+.panel-exito .nota {
+  color: #89958b;
+  font-size: 11px;
+}
+
+.panel-exito .back {
+  margin: 8px 0 0;
+}
+
+@media (max-width: 500px) {
+  .form-card {
+    padding: 22px 18px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .panel-exito {
+    padding: 24px 16px;
+  }
+}

@@ -1,0 +1,90 @@
+<main class="form-page">
+  <a class="back" routerLink="/">← Volver al inicio</a>
+
+  <section class="form-card">
+    <div class="eyebrow">CUIDADO EXPERTO, MUCHO CARIÑO</div>
+    <h1>Solicitud de servicios</h1>
+    <p class="intro">Déjanos tus datos y coordinamos una visita para tu mascota.</p>
+
+    @if (enviado) {
+      <div class="panel-exito">
+        <div class="icono-check">✓</div>
+        <h2>¡Solicitud recibida!</h2>
+        <p>
+          Gracias, <strong>{{ solicitud.responsable }}</strong>. Registramos el servicio para
+          <strong>{{ solicitud.mascota }}</strong>.
+        </p>
+        <div class="constancia">
+          <span>Código de solicitud</span>
+          <strong>{{ codigoRegistro }}</strong>
+        </div>
+        <p class="nota">{{ solicitud.servicio }} · Fecha preferida: {{ solicitud.fecha }}</p>
+        <a class="back" routerLink="/">Volver al inicio →</a>
+      </div>
+    }
+
+    @if (!enviado) {
+      <form #formServicio="ngForm" (ngSubmit)="guardar()">
+        <div class="seccion-form">
+          <h2>1. Datos de contacto</h2>
+          <div class="row">
+            <label>
+              Nombre del responsable
+              <input
+                name="responsable"
+                [(ngModel)]="solicitud.responsable"
+                required
+                placeholder="Nombre completo"
+              />
+            </label>
+            <label>
+              Nombre de la mascota
+              <input
+                name="mascota"
+                [(ngModel)]="solicitud.mascota"
+                required
+                placeholder="Ej. Luna"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div class="seccion-form">
+          <h2>2. Servicio que necesitas</h2>
+          <label>
+            Servicio solicitado
+            <select name="servicio" [(ngModel)]="solicitud.servicio" required>
+              <option>Baño y peluquería</option>
+              <option>Consulta veterinaria</option>
+              <option>Vacunación</option>
+              <option>Odontología</option>
+              <option>Desparasitación</option>
+            </select>
+          </label>
+          <label>
+            Fecha preferida
+            <input name="fecha" type="date" [(ngModel)]="solicitud.fecha" required />
+          </label>
+          <label>
+            Detalles adicionales
+            <textarea
+              name="detalle"
+              rows="4"
+              [(ngModel)]="solicitud.detalle"
+              placeholder="Alergias, preferencias u otra información importante..."
+            ></textarea>
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="!formServicio.valid"
+          [class.btn-activo]="formServicio.valid"
+          [class.btn-bloqueado]="!formServicio.valid"
+        >
+          Enviar solicitud <span>→</span>
+        </button>
+      </form>
+    }
+  </section>
+</main>
